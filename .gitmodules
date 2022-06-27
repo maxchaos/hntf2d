@@ -1,0 +1,4 @@
+
+[submodule "eigency"]
+	path = py/eigency
+	url = https://github.com/wouterboomsma/eigency
