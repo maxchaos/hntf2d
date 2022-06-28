@@ -1,4 +1,4 @@
-#include <hmap.h>
+#include <hntf2d/map.h>
 
 #include <cmath>
 #include <exception>

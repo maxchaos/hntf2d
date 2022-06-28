@@ -15,3 +15,7 @@ target_include_directories(hntf2d
   cpp/include
   ${EIGEN3_INCLUDE_DIRS}
   ${TINYXML2_INCLUDE_DIRS})
+
+install(TARGETS hntf2d)
+install(DIRECTORY cpp/include/hntf2d
+  DESTINATION "${CMAKE_INSTALL_PREFIX}/include")
