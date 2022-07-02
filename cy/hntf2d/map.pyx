@@ -31,7 +31,7 @@ from libcpp.string cimport string
 #     #     Matrix2f() except +
 #     #     Matrix2f(float x, float y) except +
 
-cdef extern from "map.h":
+cdef extern from "hntf2d/map.h":
     cdef cppclass _HarmonicMap2D "HarmonicMap2D":
           _HarmonicMap2D()
           # vector[MatrixXf*] boundaries
