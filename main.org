@@ -1,0 +1,163 @@
+#+TITLE: Harmonic Navigation Tranfromation on the Plane
+#+AUTHOR: Panagiotis Vlantis
+#+DATE: 2022-06-27 21:55:39 EEST
+#+PROPERTY: header-args    :eval never-export
+#+EXPORT_FILE_NAME: README.md
+
+* Synopsis
+  :PROPERTIES:
+  :CUSTOM_ID: sec/synopsis
+  :END:
+  This software package provides an implementation of
+  a harmonic transformation that maps any compact, multiply connected planar
+  domain onto the unit disk;
+  each of the holes that the original domain may have are collapsed onto
+  distinct points inside its image.
+
+  This transformation has been employed for addressing the navigation problem
+  of a single planar robot operating in arbitrarily shaped workspaces in
+  [[xref:c856]], [[xref:284d]].
+
+  If you end up using this transformation and/or this software package,
+  please cite the aforementioned paper as follows:
+  #+BEGIN_SRC latex
+    @INPROCEEDINGS{8460695,
+      author={Vlantis, Panagiotis and Vrohidis, Constantinos and Bechlioulis, Charalampos P. and Kyriakopoulos, Kostas J.},
+      booktitle={2018 IEEE International Conference on Robotics and Automation (ICRA)}, 
+      title={Robot Navigation in Complex Workspaces Using Harmonic Maps}, 
+      year={2018},
+      volume={},
+      number={},
+      pages={1726-1731},
+      doi={10.1109/ICRA.2018.8460695}}
+  #+END_SRC
+  #+BEGIN_EXAMPLE
+    P. Vlantis, C. Vrohidis, C. P. Bechlioulis and K. J. Kyriakopoulos, "Robot Navigation in Complex Workspaces Using Harmonic Maps," 2018 IEEE International Conference on Robotics and Automation (ICRA), 2018, pp. 1726-1731, doi: 10.1109/ICRA.2018.8460695.
+  #+END_EXAMPLE
+
+* Installation
+  In general,
+  this package provides the following two distinct outputs:
+  - a shared library implemented in C++,
+  - a python wrapper of the aforementioned library.
+
+  All these outputs depend on the following libraries,
+  which must be installed on the system in order to build them:
+  - [[xref:32a5][eigen3]],
+  - [[xref:9862][tinyxml2]].
+
+  The recommended ways to build each of these outputs are described in
+  the following subsections.
+
+** Shared Library
+  In order to build the shared library from the contained C++ source code
+  using CMake, execute the following steps:
+
+  1. Create sub-directory =build/cpp/= inside this package's root directory.
+
+  2. Inside =build/cpp=, execute the following shell command:
+     #+BEGIN_SRC shell
+       cmake -DCMAKE_INSTALL_PREFIX=prefix ../.. && make && make install
+     #+END_SRC
+     where =prefix= is a placeholder for the path to the directory
+     where the library and C++ headers will be installed at
+     (defaults to =/usr/local/= on GNU/Linux systems).
+
+  After executing these steps,
+  the library and header files should be installed as follows:
+  #+BEGIN_EXAMPLE
+    prefix/
+    ├── include
+    │   └── hntf2d
+    │       └── ...
+    └── lib
+        └── libhntf2d.so
+  #+END_EXAMPLE
+
+** Python Wrapper through Cython
+  A python wrapper for the C++ implementation is also provided using Cython.
+
+  In order to build the python wrapper,
+  the following procedure should be executed:
+
+  1. Download a customized version of the software package [[xref:61e0][eigency]]
+     located at [[xref:6c32]] by executing the following shell command inside
+     this package's root directory:
+     #+BEGIN_SRC shell
+       git submodule update --init --remote --recursive
+     #+END_SRC
+
+  2. Install the following dependencies:
+     - =numpy=
+     - =cython=
+     This can be done by executing the following shell commands:
+     #+BEGIN_SRC shell
+       python3 -m pip install cython numpy
+     #+END_SRC
+
+  3. Build and install =eigency=.
+     This can be done by executing the following shell command inside
+     the directory =cy/eigency=:
+     #+BEGIN_SRC shell
+       python3 setup.py build_ext --inplace
+       python3 setup.py install
+     #+END_SRC
+
+  4. Finally, build and install the wrapper.
+     This can be done  by executing the following shell command inside
+     the directory =cy/hntf2d=:
+     #+BEGIN_SRC shell
+       python3 setup.py build_ext --inplace
+       python3 setup.py install
+     #+END_SRC
+
+* Use
+** Cython wrapper
+  #+include: "./examples/cy/box.py" src python
+
+* Guix
+  In order to develop this package in a Guix shell with
+  all the necessary dependencies,
+  the following manifest file can be used.
+  #+BEGIN_SRC scheme :noeval :tangle manifest.scm
+    (use-modules (gnu packages)
+                 (guix packages)
+                 ((gnu packages cmake) :prefix gnu:)
+                 ((gnu packages llvm) :prefix gnu:)
+                 ((gnu packages algebra) :prefix gnu:)
+                 ((gnu packages python) :prefix gnu:)
+                 ((gnu packages python-xyz) :prefix gnu:)
+                 ((gnu packages xml) :prefix gnu:))
+
+    (packages->manifest (list gnu:cmake
+                              gnu:clang
+                              gnu:python-scikit-build
+                              gnu:eigen
+                              gnu:tinyxml2
+                              gnu:python
+                              gnu:python-cython
+                              gnu:python-numpy
+                              gnu:python-setuptools-scm))
+  #+END_SRC
+
+  #+BEGIN_SRC shell
+    guix shell -m manifest.scm
+  #+END_SRC
+
+* External References
+  :PROPERTIES:
+  :CUSTOM_ID: sec/external_references
+  :END:
+  1. Papers:
+     1. <<xref:c856>> [[https://scholar.google.com/citations?view_op=view_citation&hl=en&user=R5c4qS8AAAAJ&citation_for_view=R5c4qS8AAAAJ:u-x6o8ySG0sC][scholar.google.com -- Robot navigation in complex workspaces using harmonic maps]]
+     2. <<xref:284d>> [[https://ieeexplore.ieee.org/abstract/document/8460695][ieeexplore.ieee.org -- Robot Navigation in Complex Workspaces Using Harmonic Maps]]
+  2. Software Packages:
+     1. <<xref:32a5>> [[https://eigen.tuxfamily.org/index.php?title=Main_Page][eigen.tuxfamily.org]]
+     2. <<xref:9862>> [[http://leethomason.github.io/tinyxml2/][leethomason.github.io -- tinyxml2]]
+     3. <<xref:61e0>> [[https://github.com/wouterboomsma/eigency][github.com -- wouterboomsma/eigency]]
+     4. <<xref:6c32>> [[https://github.com/maxchaos/eigency][github.com -- maxchaos/eigency]]
+
+* File Meta Content                                                             :noexport:
+  :PROPERTIES:
+  :CUSTOM_ID: sec/file_meta_content
+  :END:
