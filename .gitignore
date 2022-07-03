@@ -1,0 +1,8 @@
+.dir-locals.el
+.projectile
+
+/build/
+/dist/
+/.cache/
+/*.egg-info/
+/manifest.scm
