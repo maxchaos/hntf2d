@@ -105,11 +105,19 @@
 
   4. Finally, build and install the wrapper.
      This can be done  by executing the following shell command inside
-     the directory =cy/hntf2d=:
+     the directory =cy/hntf2d= (ignore errors reported by the first command
+     about not finding the shared library):
      #+BEGIN_SRC shell
        python3 setup.py build_ext --inplace
        python3 setup.py install
      #+END_SRC
+
+  After completing the aforementioned procedure,
+  the usability of this package can be tested by executing
+  the following shell command:
+  #+begin_src shell
+    python3 examples/cy/box.py
+  #+end_src
 
 * Use
 ** Cython wrapper
