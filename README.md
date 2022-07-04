@@ -2,12 +2,13 @@
 # Table of Contents
 
 1.  [Synopsis](#sec/synopsis)
-2.  [Installation](#org2214c2f)
-    1.  [Shared Library](#org7a82fe4)
-    2.  [Python Wrapper through Cython](#org46b950a)
-3.  [Use](#orga63c0d3)
-    1.  [Cython wrapper](#org8575090)
-4.  [Guix](#orga274451)
+2.  [Installation](#orgbe505f4)
+    1.  [Shared Library](#orgee4f767)
+    2.  [Python Wrapper through Cython](#org73bd887)
+    3.  [Matlab Mex Files](#org9b59ee9)
+3.  [Use](#orgd3db630)
+    1.  [Cython wrapper](#org02f1442)
+4.  [Guix](#org4a37630)
 5.  [External References](#sec/external_references)
 
 
@@ -24,7 +25,7 @@ distinct points inside its image.
 
 This transformation has been employed for addressing the navigation problem
 of a single planar robot operating in arbitrarily shaped workspaces in
-[1.1](#org04b4e1e), [1.2](#org7652d3a).
+[1.1](#org55c2b89), [1.2](#org6f2b086).
 
 If you end up using this transformation and/or this software package,
 please cite the aforementioned paper as follows:
@@ -32,7 +33,7 @@ please cite the aforementioned paper as follows:
     P. Vlantis, C. Vrohidis, C. P. Bechlioulis and K. J. Kyriakopoulos, "Robot Navigation in Complex Workspaces Using Harmonic Maps," 2018 IEEE International Conference on Robotics and Automation (ICRA), 2018, pp. 1726-1731, doi: 10.1109/ICRA.2018.8460695.
 
 
-<a id="org2214c2f"></a>
+<a id="orgbe505f4"></a>
 
 # Installation
 
@@ -45,14 +46,14 @@ this package provides the following two distinct outputs:
 All these outputs depend on the following libraries,
 which must be installed on the system in order to build them:
 
--   [eigen3](#orgdf97fec),
--   [tinyxml2](#orgda7abf6).
+-   [eigen3](#orgccf90b2),
+-   [tinyxml2](#orga3022f2).
 
 The recommended ways to build each of these outputs are described in
 the following subsections.
 
 
-<a id="org7a82fe4"></a>
+<a id="orgee4f767"></a>
 
 ## Shared Library
 
@@ -80,7 +81,7 @@ the library and header files should be installed as follows:
         └── libhntf2d.so
 
 
-<a id="org46b950a"></a>
+<a id="org73bd887"></a>
 
 ## Python Wrapper through Cython
 
@@ -89,8 +90,8 @@ A python wrapper for the C++ implementation is also provided using Cython.
 In order to build the python wrapper,
 the following procedure should be executed:
 
-1.  Download a customized version of the software package [eigency](#orgf723540)
-    located at [2.4](#org0019391) by executing the following shell command inside
+1.  Download a customized version of the software package [eigency](#orgb304258)
+    located at [2.4](#orgda5473b) by executing the following shell command inside
     this package's root directory:
     
         git submodule update --init --remote --recursive
@@ -126,12 +127,21 @@ the following shell command:
     python3 examples/cy/box.py
 
 
-<a id="orga63c0d3"></a>
+<a id="org9b59ee9"></a>
+
+## Matlab Mex Files
+
+A version of the C++ library has been compiled with Matlab 2018a 64bit
+into Mex files, which have been packed and are available for download from
+this repository's releases.
+
+
+<a id="orgd3db630"></a>
 
 # Use
 
 
-<a id="org8575090"></a>
+<a id="org02f1442"></a>
 
 ## Cython wrapper
 
@@ -198,7 +208,7 @@ the following shell command:
     print(hm.jacob(0., 0.5))
 
 
-<a id="orga274451"></a>
+<a id="org4a37630"></a>
 
 # Guix
 
@@ -233,11 +243,11 @@ the following manifest file can be used.
 # External References
 
 1.  Papers:
-    1.  <a id="org04b4e1e"></a> [scholar.google.com &#x2013; Robot navigation in complex workspaces using harmonic maps](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=R5c4qS8AAAAJ&citation_for_view=R5c4qS8AAAAJ:u-x6o8ySG0sC)
-    2.  <a id="org7652d3a"></a> [ieeexplore.ieee.org &#x2013; Robot Navigation in Complex Workspaces Using Harmonic Maps](https://ieeexplore.ieee.org/abstract/document/8460695)
+    1.  <a id="org55c2b89"></a> [scholar.google.com &#x2013; Robot navigation in complex workspaces using harmonic maps](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=R5c4qS8AAAAJ&citation_for_view=R5c4qS8AAAAJ:u-x6o8ySG0sC)
+    2.  <a id="org6f2b086"></a> [ieeexplore.ieee.org &#x2013; Robot Navigation in Complex Workspaces Using Harmonic Maps](https://ieeexplore.ieee.org/abstract/document/8460695)
 2.  Software Packages:
-    1.  <a id="orgdf97fec"></a> [eigen.tuxfamily.org](https://eigen.tuxfamily.org/index.php?title=Main_Page)
-    2.  <a id="orgda7abf6"></a> [leethomason.github.io &#x2013; tinyxml2](http://leethomason.github.io/tinyxml2/)
-    3.  <a id="orgf723540"></a> [github.com &#x2013; wouterboomsma/eigency](https://github.com/wouterboomsma/eigency)
-    4.  <a id="org0019391"></a> [github.com &#x2013; maxchaos/eigency](https://github.com/maxchaos/eigency)
+    1.  <a id="orgccf90b2"></a> [eigen.tuxfamily.org](https://eigen.tuxfamily.org/index.php?title=Main_Page)
+    2.  <a id="orga3022f2"></a> [leethomason.github.io &#x2013; tinyxml2](http://leethomason.github.io/tinyxml2/)
+    3.  <a id="orgb304258"></a> [github.com &#x2013; wouterboomsma/eigency](https://github.com/wouterboomsma/eigency)
+    4.  <a id="orgda5473b"></a> [github.com &#x2013; maxchaos/eigency](https://github.com/maxchaos/eigency)
 

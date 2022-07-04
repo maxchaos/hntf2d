@@ -119,6 +119,11 @@
     python3 examples/cy/box.py
   #+end_src
 
+** Matlab Mex Files
+  A version of the C++ library has been compiled with Matlab 2018a 64bit
+  into Mex files, which have been packed and are available for download from
+  this repository's releases.
+
 * Use
 ** Cython wrapper
   #+include: "./examples/cy/box.py" src python
