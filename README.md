@@ -114,7 +114,7 @@ the following procedure should be executed:
 
 4.  Finally, build and install the wrapper.
     This can be done  by executing the following shell command inside
-    the directory `cy/hntf2d` (ignore errors reported by the first command
+    the root directory (ignore errors reported by the first command
     about not finding the shared library):
     
         python3 setup.py build_ext --inplace
